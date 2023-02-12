@@ -2,16 +2,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
-class QItemComparator implements Comparator<QItem> {
-    public int compare(QItem qItem1, QItem qItem2) {
-        return qItem1.dist.compareTo(qItem2.dist);
-    }
-}
-
-public class App {
+public class BFS {
     private static void findShortestPath(char[][] grid) {
         QItem source = new QItem(0, 0, 0.0);
 
@@ -26,7 +21,7 @@ public class App {
             }
         }
 
-        PriorityQueue<QItem> queue = new PriorityQueue<QItem>(new QItemComparator());
+        Queue<QItem> queue = new LinkedList<>();
         queue.add(new QItem(source.row, source.col, 0.0));
 
         boolean[][] visited = new boolean[grid.length][grid[0].length];
@@ -52,7 +47,7 @@ public class App {
                     }
                     System.out.print("\n");
                 }
-                return; 
+                return;
             }
 
             Parent parent = new Parent(p.row, p.col);
